@@ -17,6 +17,7 @@ var USER_COLOR = 'rgba(255, 0, 0, 1)';
 var renderCloud = function (ctx, x, y, color, bordered) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
+
   if (bordered) {
     ctx.strokeStyle = '#000';
     ctx.lineWidth = 1;
@@ -24,9 +25,17 @@ var renderCloud = function (ctx, x, y, color, bordered) {
   }
 };
 
-var renderColumn = function (ctx, x, y, color, player, time, maxTime) {
+var getColumnColor = function (player) {
+  if (player === 'Вы') {
+    return USER_COLOR;
+  }
+  var saturation = Math.floor(Math.random() * 101);
+  return 'hsl(240, ' + saturation + '%, 50%)';
+};
+
+var renderColumn = function (ctx, x, y, player, time, maxTime) {
   var barHeight = BAR_HEIGHT * time / maxTime;
-  ctx.fillStyle = color;
+  ctx.fillStyle = getColumnColor(player);
   ctx.fillRect(x, y - GAP, BAR_WIDTH, -barHeight);
   ctx.fillStyle = '#000';
   ctx.textBaseline = 'top';
@@ -60,7 +69,6 @@ window.renderStatistics = function (ctx, players, times) {
 
   for (var i = 0; i < players.length; i++) {
     var x = TEXT_X + (TEXT_WIDTH + COLUMN_GAP) * i;
-    var color = players[i] === 'Вы' ? USER_COLOR : 'hsl(240, ' + Math.floor(Math.random() * 6) * 20 + '%, 50%)';
-    renderColumn(ctx, x, TEXT_Y, color, players[i], times[i], maxTime);
+    renderColumn(ctx, x, TEXT_Y, players[i], times[i], maxTime);
   }
 };
