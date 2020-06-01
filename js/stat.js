@@ -29,7 +29,7 @@ var getColumnColor = function (player) {
   if (player === 'Вы') {
     return USER_COLOR;
   }
-  var saturation = Math.floor(Math.random() * 101);
+  var saturation = Math.round(Math.random() * 100);
   return 'hsl(240, ' + saturation + '%, 50%)';
 };
 
