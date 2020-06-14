@@ -31,13 +31,9 @@ var createCharacter = function () {
 };
 
 var createCharactersArr = function (length) {
-  var arr = [];
-
-  for (var i = 0; i < length; i++) {
-    arr.push(createCharacter());
-  }
-
-  return arr;
+  return new Array(length).fill(null).map(function () {
+    return createCharacter();
+  });
 };
 
 var renderWizard = function (wizard) {
