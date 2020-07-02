@@ -44,4 +44,9 @@
   setupClose.addEventListener('keydown', onSetupCloseInteract);
 
   window.move.initMove(setup, setupMoveHandle);
+
+  window.dialog = {
+    openPopup: openPopup,
+    closePopup: closePopup,
+  };
 })();
